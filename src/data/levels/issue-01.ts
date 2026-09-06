@@ -51,7 +51,7 @@ export const issue01: Level = {
         'Nova turns fully toward Jax, jaw set',
       ],
       images: ['/art/issue-01/b4.png', '/art/issue-01/t1-1.png'],
-      holdMs: 1600,
+      holdMs: 3200,
     },
     {
       id: 'b5',

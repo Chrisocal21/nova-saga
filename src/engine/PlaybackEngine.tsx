@@ -7,7 +7,7 @@ import { ChoiceBeatView } from './beats/ChoiceBeatView'
 import { SpeechBubble } from './beats/SpeechBubble'
 import { TransitionMontage } from './beats/TransitionMontage'
 
-const TRANSITION_HOLD_MS = 1800
+const TRANSITION_HOLD_MS = 3000
 const TEXT_REVEAL_DELAY_MS = 550
 
 interface PlaybackEngineProps {
