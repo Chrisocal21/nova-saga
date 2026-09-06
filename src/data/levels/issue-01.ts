@@ -24,6 +24,16 @@ export const issue01: Level = {
       text: "Nova kept her head down. Being seen was the first mistake most people made.",
     },
     {
+      id: 't0',
+      kind: 'transition',
+      panelLabels: [
+        'Wide shot — a grounded, dystopian city skyline at dusk',
+        'Street level — Nova moves through a crowd, hood up',
+      ],
+      images: ['/art/issue-01/b1.png', '/art/issue-01/b2.png'],
+      holdMs: 3200,
+    },
+    {
       id: 'b3',
       kind: 'bubble',
       panelLabel: 'Close on a side character leaning against a wall, smirking',
