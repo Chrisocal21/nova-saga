@@ -13,11 +13,11 @@ export function Panel({ label, src, seed, className = '' }: PanelProps) {
   const mockSrc = `https://picsum.photos/seed/${encodeURIComponent(seed ?? label)}/1600/1200`
 
   return (
-    <div className={`relative overflow-hidden bg-slate-900 ${className}`}>
+    <div className={`panel-turn relative overflow-hidden bg-black ${className}`}>
       <img
         src={src ?? mockSrc}
         alt=""
-        className="absolute inset-0 h-full w-full object-cover"
+        className={`absolute inset-0 h-full w-full ${src ? 'object-contain' : 'object-cover'}`}
         style={src ? undefined : { filter: 'grayscale(0.55) brightness(0.6) saturate(0.75) contrast(1.1)' }}
       />
       {!src && (
