@@ -101,7 +101,7 @@ export function PlaybackEngine({ level, onChoicesChange }: PlaybackEngineProps) 
 
   return (
     <div className="relative flex h-screen w-full flex-col overflow-hidden bg-black">
-      <p className="absolute left-4 top-4 z-10 text-xs uppercase tracking-widest text-purple-300/70">
+      <p className="absolute left-4 top-4 z-10 font-display text-xs uppercase tracking-widest text-amber-400/70">
         {level.series} — Issue {level.issueNumber}
       </p>
 
@@ -150,7 +150,7 @@ export function PlaybackEngine({ level, onChoicesChange }: PlaybackEngineProps) 
             )}
 
             {atEnd && showText && (
-              <p className="mt-4 text-xs uppercase tracking-widest text-white/30">
+              <p className="mt-4 font-display text-xs uppercase tracking-widest text-white/30">
                 End of issue
               </p>
             )}
@@ -165,7 +165,7 @@ export function PlaybackEngine({ level, onChoicesChange }: PlaybackEngineProps) 
           aria-label="Continue"
           className="absolute inset-y-0 right-0 z-20 flex w-1/2 cursor-pointer items-end justify-end p-6"
         >
-          <span className="animate-pulse text-xs uppercase tracking-widest text-white/40">
+          <span className="animate-pulse font-display text-xs uppercase tracking-widest text-white/40">
             Tap to continue
           </span>
         </button>
