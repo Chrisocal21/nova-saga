@@ -57,14 +57,14 @@ export const issue01: Level = {
       id: 'b5',
       kind: 'caption',
       panelLabel: 'Two-shot — Nova and Jax facing each other in the empty street',
-      image: '/art/issue-01/b5.png',
+      image: '/art/issue-01/c1.png',
       text: 'He had news. He always had news. The question was whether it was worth the price he’d ask for it.',
     },
     {
       id: 'c1',
       kind: 'choice',
       panelLabel: 'Two-shot — Nova and Jax facing each other in the empty street',
-      image: '/art/issue-01/c1.png',
+      image: '/art/issue-01/b5.png',
       prompt: 'How does Nova respond to Jax?',
       options: [
         { id: 'trust', label: 'Hear him out — he has earned that much' },
