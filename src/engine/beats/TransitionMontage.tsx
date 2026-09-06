@@ -7,7 +7,7 @@ import type { TransitionBeat } from '../../types/story'
 // turns to the next beat where text/dialogue resumes.
 export function TransitionMontage({ beat }: { beat: TransitionBeat }) {
   return (
-    <div className="flex h-full w-full gap-1 bg-black">
+    <div className="flex h-full w-full flex-col gap-1 bg-black">
       {beat.panelLabels.map((label, i) => (
         <Panel
           key={i}

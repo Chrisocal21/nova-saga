@@ -37,7 +37,7 @@ export const issue01: Level = {
       id: 'b4',
       kind: 'bubble',
       panelLabel: 'Nova, half-turned, unreadable expression',
-      image: '/art/issue-01/b4.png',
+      image: '/art/issue-01/t1-0.png',
       speaker: 'Nova',
       bubbleType: 'thought',
       position: 'right',
@@ -50,7 +50,7 @@ export const issue01: Level = {
         'Nova stops walking, shoulders tense',
         'Nova turns fully toward Jax, jaw set',
       ],
-      images: ['/art/issue-01/t1-0.png', '/art/issue-01/t1-1.png'],
+      images: ['/art/issue-01/b4.png', '/art/issue-01/t1-1.png'],
       holdMs: 1600,
     },
     {
