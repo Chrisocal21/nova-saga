@@ -22,6 +22,9 @@ export interface BubbleBeat {
   image?: string
   speaker: string
   bubbleType: 'speech' | 'thought'
+  /** Roughly where the speaker sits in the panel art, so the bubble floats
+   * near them instead of the center of the screen. Defaults to 'right'. */
+  position?: 'left' | 'right'
   text: string
 }
 
@@ -31,6 +34,8 @@ export interface TransitionBeat {
   panelLabels: string[]
   images?: string[]
   holdMs?: number
+  /** Comic burst text (e.g. "POW") shown over the final frame's hold. */
+  impactText?: string
 }
 
 export interface ChoiceBeat {

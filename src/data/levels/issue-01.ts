@@ -30,6 +30,7 @@ export const issue01: Level = {
       image: '/art/issue-01/b3.png',
       speaker: 'Jax',
       bubbleType: 'speech',
+      position: 'left',
       text: "You walk like someone who's late for a fight she didn't start.",
     },
     {
@@ -39,6 +40,7 @@ export const issue01: Level = {
       image: '/art/issue-01/b4.png',
       speaker: 'Nova',
       bubbleType: 'thought',
+      position: 'right',
       text: "Same old Jax. Never once bothered to whisper.",
     },
     {
@@ -50,6 +52,7 @@ export const issue01: Level = {
       ],
       images: ['/art/issue-01/t1-0.png', '/art/issue-01/t1-1.png'],
       holdMs: 1600,
+      impactText: 'SNAP!',
     },
     {
       id: 'b5',

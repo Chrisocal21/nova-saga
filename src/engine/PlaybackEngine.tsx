@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react'
 import type { Level } from '../types/story'
+import { ImpactBurst } from './ImpactBurst'
 import { Panel } from './Panel'
-import { BubbleBeatView } from './beats/BubbleBeatView'
 import { CaptionBeatView } from './beats/CaptionBeatView'
 import { ChoiceBeatView } from './beats/ChoiceBeatView'
+import { SpeechBubble } from './beats/SpeechBubble'
 
 const TRANSITION_FRAME_MS = 700
 const TEXT_REVEAL_DELAY_MS = 550
@@ -117,29 +118,46 @@ export function PlaybackEngine({ level, onChoicesChange }: PlaybackEngineProps) 
         className="flex-1"
       />
 
-      <div
-        className={`absolute inset-x-0 bottom-0 bg-gradient-to-t from-black via-black/85 to-transparent px-6 pb-8 pt-20 transition-opacity duration-500 ${
-          showText ? 'opacity-100' : 'pointer-events-none opacity-0'
-        }`}
-      >
-        <div className="mx-auto flex w-full max-w-xl flex-col items-center text-center">
-          {beat.kind === 'caption' && <CaptionBeatView beat={beat} />}
-          {beat.kind === 'bubble' && <BubbleBeatView beat={beat} />}
-          {beat.kind === 'choice' && (
-            <ChoiceBeatView
-              beat={beat}
-              selectedId={choices[beat.id]}
-              onSelect={(optionId) => handleSelect(beat.id, optionId)}
-            />
-          )}
+      {beat.kind === 'transition' &&
+        beat.impactText &&
+        transitionFrame === beat.panelLabels.length - 1 && (
+          <ImpactBurst key={beat.id} text={beat.impactText} />
+        )}
 
-          {atEnd && showText && (
-            <p className="mt-4 text-xs uppercase tracking-widest text-white/30">
-              End of issue
-            </p>
-          )}
+      {beat.kind === 'bubble' && (
+        <div
+          className={`transition-opacity duration-500 ${
+            showText ? 'opacity-100' : 'pointer-events-none opacity-0'
+          }`}
+        >
+          <SpeechBubble beat={beat} />
         </div>
-      </div>
+      )}
+
+      {beat.kind !== 'bubble' && (
+        <div
+          className={`absolute inset-x-0 bottom-0 bg-gradient-to-t from-black via-black/85 to-transparent px-6 pb-8 pt-20 transition-opacity duration-500 ${
+            showText ? 'opacity-100' : 'pointer-events-none opacity-0'
+          }`}
+        >
+          <div className="mx-auto flex w-full max-w-xl flex-col items-center text-center">
+            {beat.kind === 'caption' && <CaptionBeatView beat={beat} />}
+            {beat.kind === 'choice' && (
+              <ChoiceBeatView
+                beat={beat}
+                selectedId={choices[beat.id]}
+                onSelect={(optionId) => handleSelect(beat.id, optionId)}
+              />
+            )}
+
+            {atEnd && showText && (
+              <p className="mt-4 text-xs uppercase tracking-widest text-white/30">
+                End of issue
+              </p>
+            )}
+          </div>
+        </div>
+      )}
 
       {canAdvanceOnClick && (
         <button
