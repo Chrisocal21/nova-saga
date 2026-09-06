@@ -170,7 +170,7 @@ export function PlaybackEngine({ level, onChoicesChange }: PlaybackEngineProps) 
       {beat.kind === 'choice' && (
         <div
           key={`choice-${beat.id}`}
-          className={`absolute bottom-4 right-4 z-10 transition-opacity duration-500 sm:bottom-6 sm:right-6 ${
+          className={`transition-opacity duration-500 ${
             showText ? 'opacity-100' : 'pointer-events-none opacity-0'
           }`}
         >
