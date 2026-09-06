@@ -43,7 +43,7 @@ export const issue01: Level = {
         'Nova stops walking, shoulders tense',
         'Nova turns fully toward Jax, jaw set',
       ],
-      holdMs: 900,
+      holdMs: 1600,
     },
     {
       id: 'b5',

@@ -6,6 +6,7 @@ import { CaptionBeatView } from './beats/CaptionBeatView'
 import { ChoiceBeatView } from './beats/ChoiceBeatView'
 
 const TRANSITION_FRAME_MS = 700
+const TEXT_REVEAL_DELAY_MS = 550
 
 interface PlaybackEngineProps {
   level: Level
@@ -28,6 +29,7 @@ export function PlaybackEngine({ level, onChoicesChange }: PlaybackEngineProps) 
   const [index, setIndex] = useState(0)
   const [choices, setChoices] = useState<Record<string, string>>({})
   const [transitionFrame, setTransitionFrame] = useState(0)
+  const [showText, setShowText] = useState(false)
 
   const beats = level.beats
   const beat = beats[index]
@@ -37,6 +39,16 @@ export function PlaybackEngine({ level, onChoicesChange }: PlaybackEngineProps) 
     setIndex((i) => Math.min(i + 1, beats.length - 1))
     setTransitionFrame(0)
   }
+
+  // Let the art hold on screen a beat before the text/choices appear, so the
+  // panel isn't upstaged by the caption the instant it arrives.
+  useEffect(() => {
+    setShowText(false)
+    if (beat.kind === 'transition') return
+
+    const timer = setTimeout(() => setShowText(true), TEXT_REVEAL_DELAY_MS)
+    return () => clearTimeout(timer)
+  }, [beat])
 
   // Transition beats auto-play their frames, then auto-advance to the next beat.
   useEffect(() => {
@@ -77,7 +89,8 @@ export function PlaybackEngine({ level, onChoicesChange }: PlaybackEngineProps) 
     })
   }
 
-  const canAdvanceOnClick = !atEnd && (beat.kind === 'caption' || beat.kind === 'bubble')
+  const canAdvanceOnClick =
+    !atEnd && showText && (beat.kind === 'caption' || beat.kind === 'bubble')
 
   return (
     <div
@@ -101,7 +114,11 @@ export function PlaybackEngine({ level, onChoicesChange }: PlaybackEngineProps) 
         className="flex-1"
       />
 
-      <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black via-black/85 to-transparent px-6 pb-8 pt-20">
+      <div
+        className={`absolute inset-x-0 bottom-0 bg-gradient-to-t from-black via-black/85 to-transparent px-6 pb-8 pt-20 transition-opacity duration-500 ${
+          showText ? 'opacity-100' : 'pointer-events-none opacity-0'
+        }`}
+      >
         {beat.kind === 'caption' && <CaptionBeatView beat={beat} />}
         {beat.kind === 'bubble' && <BubbleBeatView beat={beat} />}
         {beat.kind === 'choice' && (
@@ -117,7 +134,7 @@ export function PlaybackEngine({ level, onChoicesChange }: PlaybackEngineProps) 
             Tap to continue
           </p>
         )}
-        {atEnd && (
+        {atEnd && showText && (
           <p className="mt-4 text-center text-xs uppercase tracking-widest text-white/30">
             End of issue
           </p>
