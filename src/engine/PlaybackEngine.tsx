@@ -1,15 +1,12 @@
 import { useEffect, useState } from 'react'
 import type { Level } from '../types/story'
-import { HudButton } from './HudButton'
 import { ImpactBurst } from './ImpactBurst'
 import { OverlayScreen } from './OverlayScreen'
 import { Panel } from './Panel'
+import { RelicPanel } from './RelicPanel'
 import { CaptionBeatView } from './beats/CaptionBeatView'
-import { ChoiceBeatView } from './beats/ChoiceBeatView'
 import { SpeechBubble } from './beats/SpeechBubble'
 import { TransitionMontage } from './beats/TransitionMontage'
-import { BranchIcon } from './icons/BranchIcon'
-import { RelicIcon } from './icons/RelicIcon'
 
 type Overlay = 'branch' | 'relic' | null
 
@@ -112,15 +109,6 @@ export function PlaybackEngine({ level, onChoicesChange }: PlaybackEngineProps) 
         {level.series} — Issue {level.issueNumber}
       </p>
 
-      <div className="absolute right-4 top-4 z-30 flex gap-2">
-        <HudButton label="Branch and relationship status" onClick={() => setOverlay('branch')}>
-          <BranchIcon className="h-4 w-4" />
-        </HudButton>
-        <HudButton label="The Relic" onClick={() => setOverlay('relic')}>
-          <RelicIcon className="h-4 w-4" />
-        </HudButton>
-      </div>
-
       {beat.kind === 'transition' ? (
         <TransitionMontage key={`panel-${beat.id}`} beat={beat} />
       ) : (
@@ -148,39 +136,35 @@ export function PlaybackEngine({ level, onChoicesChange }: PlaybackEngineProps) 
         </div>
       )}
 
-      {beat.kind === 'caption' && (
-        <div
-          key={`bar-${beat.id}`}
-          className={`absolute inset-x-0 bottom-0 bg-gradient-to-t from-black via-black/85 to-transparent px-6 pb-8 pt-20 transition-opacity duration-500 ${
-            showText ? 'opacity-100' : 'pointer-events-none opacity-0'
-          }`}
-        >
-          <div className="mx-auto flex w-full max-w-xl flex-col items-center text-center">
-            <CaptionBeatView beat={beat} />
+      <div className="absolute inset-x-0 bottom-0 z-30 flex flex-col">
+        {beat.kind === 'caption' && (
+          <div
+            key={`bar-${beat.id}`}
+            className={`bg-gradient-to-t from-black via-black/85 to-transparent px-6 pb-4 pt-20 transition-opacity duration-500 ${
+              showText ? 'opacity-100' : 'pointer-events-none opacity-0'
+            }`}
+          >
+            <div className="mx-auto flex w-full max-w-xl flex-col items-center text-center">
+              <CaptionBeatView beat={beat} />
 
-            {atEnd && showText && (
-              <p className="mt-4 font-display text-xs uppercase tracking-widest text-white/30">
-                End of issue
-              </p>
-            )}
+              {atEnd && showText && (
+                <p className="mt-4 font-display text-xs uppercase tracking-widest text-white/30">
+                  End of issue
+                </p>
+              )}
+            </div>
           </div>
-        </div>
-      )}
+        )}
 
-      {beat.kind === 'choice' && (
-        <div
-          key={`choice-${beat.id}`}
-          className={`transition-opacity duration-500 ${
-            showText ? 'opacity-100' : 'pointer-events-none opacity-0'
-          }`}
-        >
-          <ChoiceBeatView
-            beat={beat}
-            selectedId={choices[beat.id]}
-            onSelect={(optionId) => handleSelect(beat.id, optionId)}
-          />
-        </div>
-      )}
+        <RelicPanel
+          beat={beat}
+          showChoice={showText}
+          selectedId={choices[beat.id]}
+          onSelect={(optionId) => handleSelect(beat.id, optionId)}
+          onOpenBranch={() => setOverlay('branch')}
+          onOpenRelic={() => setOverlay('relic')}
+        />
+      </div>
 
       {canAdvanceOnClick && (
         <button
