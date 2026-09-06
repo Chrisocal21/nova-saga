@@ -1,23 +1,25 @@
 # Nova (working title) — Progress Tracker
 
-**Overall progress:** 0%
+**Overall progress:** 4%
 **Last updated:** September 6, 2026
-**Status:** Exploring — planning complete, no build started
+**Status:** Building — Phase 1 underway
 
 ---
 
 ### Phase 1 — Prove the Core Loop
 
-**Phase progress:** 0%
+**Phase progress:** 20%
 **Goal:** One real level, fully playable, proving the format works before building out a whole trilogy.
 
 #### Feature 1.1 — Core Playback Engine
-**Progress:** 0%
+**Progress:** 100%
 
-- [ ] Build continuous-scroll visual novel page renderer
-- [ ] Implement inline choice panels (up to 3 options, no popup, no timer)
-- [ ] Build transition beat system (short pose/frame sequences at meaningful scene changes)
-- [ ] Build dual text system (VN captions for narrative, comic bubbles for side/humor beats)
+- [x] Build continuous-scroll visual novel page renderer
+- [x] Implement inline choice panels (up to 3 options, no popup, no timer)
+- [x] Build transition beat system (short pose/frame sequences at meaningful scene changes)
+- [x] Build dual text system (VN captions for narrative, comic bubbles for side/humor beats)
+
+Implemented in `src/engine/` on top of a typed beat model (`src/types/story.ts`), with a placeholder script for Issue 1 (`src/data/levels/issue-01.ts`) used to prove the loop. Art panels are placeholder boxes until the art pipeline exists. Project scaffolded as React + Vite + TypeScript + Tailwind, per NOVA_CLAUDE_GUIDE.md stack.
 
 #### Feature 1.2 — Relationship and Branch System
 **Progress:** 0%
@@ -151,6 +153,7 @@
 | Date | What Moved | New Overall |
 |---|---|---|
 | September 6, 2026 | Full planning session: core loop, art direction, format, and platform all locked. Docs generated. No build started yet. | 0% |
+| September 6, 2026 | Project scaffolded (React + Vite + TS + Tailwind, git init). Feature 1.1 (Core Playback Engine) built and typechecked: continuous-scroll renderer, inline choice panels, transition beat system, dual text system, placeholder Issue 1 script. | 4% |
 
 ---
 
