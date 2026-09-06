@@ -123,6 +123,7 @@ export function PlaybackEngine({ level, onChoicesChange }: PlaybackEngineProps) 
 
       {beat.kind === 'bubble' && (
         <div
+          key={beat.id}
           className={`transition-opacity duration-500 ${
             showText ? 'opacity-100' : 'pointer-events-none opacity-0'
           }`}
@@ -133,6 +134,7 @@ export function PlaybackEngine({ level, onChoicesChange }: PlaybackEngineProps) 
 
       {beat.kind !== 'bubble' && (
         <div
+          key={beat.id}
           className={`absolute inset-x-0 bottom-0 bg-gradient-to-t from-black via-black/85 to-transparent px-6 pb-8 pt-20 transition-opacity duration-500 ${
             showText ? 'opacity-100' : 'pointer-events-none opacity-0'
           }`}
