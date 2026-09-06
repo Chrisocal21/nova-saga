@@ -6,9 +6,9 @@
 
 ## What This Project Is
 
-A browser/PWA branching narrative game built on Chris's original Nova comic series. Each comic issue is a playable level, presented as a continuous-scroll, visual-novel-style read with comic-panel art. Player choices shift relationships with the people around Nova, which change what happens in future levels. A learned time-travel ability (the Relic) lets the player rewind to any past level and replay it differently.
+A browser/PWA branching narrative game built on Chris's original Nova comic series. Each comic issue is a playable level, presented as a single full-screen panel at a time (each beat fully replaces the last), comic-panel art. Player choices shift relationships with the people around Nova, which change what happens in future levels. A learned time-travel ability (the Relic) lets the player rewind to any past level and replay it differently.
 
-Full story reference: NOVA_STORY_BIBLE.md, NOVA_CLIFFNOTES.md, NOVA_TIMELINE.md.
+Full story reference: `brain/` — the living, tagged story-bible knowledge base (start at `brain/README.md`). NOVA_STORY_BIBLE.md, NOVA_CLIFFNOTES.md, and NOVA_TIMELINE.md were referenced by an earlier planning session but were never actually added to this project — `brain/` is the current source of truth and is still a skeleton pending that richer material.
 Full planning reference: NOVA_FEATURE_MAP.md, NOVA_PROGRESS_TRACKER.md, NOVA_OPEN_QUESTIONS.md, NOVA_PROJECT_LOG.md.
 
 ---
