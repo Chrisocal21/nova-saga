@@ -1,11 +1,17 @@
 import { useEffect, useState } from 'react'
 import type { Level } from '../types/story'
+import { HudButton } from './HudButton'
 import { ImpactBurst } from './ImpactBurst'
+import { OverlayScreen } from './OverlayScreen'
 import { Panel } from './Panel'
 import { CaptionBeatView } from './beats/CaptionBeatView'
 import { ChoiceBeatView } from './beats/ChoiceBeatView'
 import { SpeechBubble } from './beats/SpeechBubble'
 import { TransitionMontage } from './beats/TransitionMontage'
+import { BranchIcon } from './icons/BranchIcon'
+import { RelicIcon } from './icons/RelicIcon'
+
+type Overlay = 'branch' | 'relic' | null
 
 const TRANSITION_HOLD_MS = 3000
 const TEXT_REVEAL_DELAY_MS = 550
@@ -42,6 +48,7 @@ export function PlaybackEngine({ level, onChoicesChange }: PlaybackEngineProps) 
   const [index, setIndex] = useState(0)
   const [choices, setChoices] = useState<Record<string, string>>({})
   const [revealedBeatId, setRevealedBeatId] = useState<string | null>(null)
+  const [overlay, setOverlay] = useState<Overlay>(null)
 
   const beats = level.beats
   const beat = beats[index]
@@ -104,6 +111,15 @@ export function PlaybackEngine({ level, onChoicesChange }: PlaybackEngineProps) 
       <p className="absolute left-4 top-4 z-10 font-display text-xs uppercase tracking-widest text-amber-400/70">
         {level.series} — Issue {level.issueNumber}
       </p>
+
+      <div className="absolute right-4 top-4 z-30 flex gap-2">
+        <HudButton label="Branch and relationship status" onClick={() => setOverlay('branch')}>
+          <BranchIcon className="h-4 w-4" />
+        </HudButton>
+        <HudButton label="The Relic" onClick={() => setOverlay('relic')}>
+          <RelicIcon className="h-4 w-4" />
+        </HudButton>
+      </div>
 
       {beat.kind === 'transition' ? (
         <TransitionMontage key={`panel-${beat.id}`} beat={beat} />
@@ -169,6 +185,30 @@ export function PlaybackEngine({ level, onChoicesChange }: PlaybackEngineProps) 
             Tap to continue
           </span>
         </button>
+      )}
+
+      {overlay === 'branch' && (
+        <OverlayScreen title="Branch & Relationship Status" onClose={() => setOverlay(null)}>
+          <p className="text-sm leading-relaxed">
+            Where you stand with everyone, and how far your path has drifted
+            from canon, will live here.
+          </p>
+          <p className="mt-4 font-display text-xs uppercase tracking-wider text-amber-500/70">
+            Coming in Feature 1.2 — Relationship and Branch System
+          </p>
+        </OverlayScreen>
+      )}
+
+      {overlay === 'relic' && (
+        <OverlayScreen title="The Relic" onClose={() => setOverlay(null)}>
+          <p className="text-sm leading-relaxed">
+            Rewind to any past issue and replay it differently — full range,
+            no distance limit, regenerating as you play.
+          </p>
+          <p className="mt-4 font-display text-xs uppercase tracking-wider text-amber-500/70">
+            Coming in Feature 1.3 — The Relic (Time Travel)
+          </p>
+        </OverlayScreen>
       )}
     </div>
   )
