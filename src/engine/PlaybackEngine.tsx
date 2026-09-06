@@ -106,10 +106,10 @@ export function PlaybackEngine({ level, onChoicesChange }: PlaybackEngineProps) 
       </p>
 
       {beat.kind === 'transition' ? (
-        <TransitionMontage key={beat.id} beat={beat} />
+        <TransitionMontage key={`panel-${beat.id}`} beat={beat} />
       ) : (
         <Panel
-          key={beat.id}
+          key={`panel-${beat.id}`}
           src={panelSrcFor(beat)}
           seed={beat.id}
           label={panelLabelFor(beat)}
@@ -118,12 +118,12 @@ export function PlaybackEngine({ level, onChoicesChange }: PlaybackEngineProps) 
       )}
 
       {beat.kind === 'transition' && beat.impactText && (
-        <ImpactBurst key={beat.id} text={beat.impactText} />
+        <ImpactBurst key={`impact-${beat.id}`} text={beat.impactText} />
       )}
 
       {beat.kind === 'bubble' && (
         <div
-          key={beat.id}
+          key={`bubble-${beat.id}`}
           className={`transition-opacity duration-500 ${
             showText ? 'opacity-100' : 'pointer-events-none opacity-0'
           }`}
@@ -134,7 +134,7 @@ export function PlaybackEngine({ level, onChoicesChange }: PlaybackEngineProps) 
 
       {beat.kind !== 'bubble' && (
         <div
-          key={beat.id}
+          key={`bar-${beat.id}`}
           className={`absolute inset-x-0 bottom-0 bg-gradient-to-t from-black via-black/85 to-transparent px-6 pb-8 pt-20 transition-opacity duration-500 ${
             showText ? 'opacity-100' : 'pointer-events-none opacity-0'
           }`}
