@@ -1,11 +1,8 @@
 import type { ChoiceBeat } from '../../types/story'
 
-const PANEL_CLIP = 'polygon(14px 0, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%, 0 14px)'
-const OPTION_CLIP = 'polygon(12px 0, 100% 0, 100% 100%, 0 100%, 0 12px)'
-
-// Game-menu shape language (chamfered/angled corners, a tab-style number
-// block, a hover indicator) rather than a rounded-rectangle web form
-// wearing story colors.
+// A small floating device card (like an in-world handheld/tablet readout)
+// instead of a full-width banner - stays compact so it never dominates the
+// screen, especially on mobile.
 export function ChoiceBeatView({
   beat,
   selectedId,
@@ -16,17 +13,23 @@ export function ChoiceBeatView({
   onSelect: (optionId: string) => void
 }) {
   return (
-    <div
-      className="w-full border-2 border-amber-600/60 bg-gradient-to-br from-[#1d1710] to-[#0a0806] shadow-[0_0_28px_rgba(217,119,6,0.2)]"
-      style={{ clipPath: PANEL_CLIP }}
-    >
-      <div className="border-b-2 border-amber-600/40 bg-black/30 px-6 py-3">
-        <p className="text-center font-display text-base font-bold uppercase tracking-[0.2em] text-amber-400">
+    <div className="relative w-[min(88vw,320px)] overflow-hidden rounded-lg border border-amber-500/50 bg-[#0d0b08]/95 shadow-[0_0_20px_rgba(217,119,6,0.25)]">
+      <div
+        className="pointer-events-none absolute inset-0 opacity-[0.06]"
+        style={{
+          backgroundImage:
+            'repeating-linear-gradient(0deg, #fff 0px, #fff 1px, transparent 1px, transparent 3px)',
+        }}
+      />
+
+      <div className="relative flex items-center gap-2 border-b border-amber-500/30 bg-black/40 px-3 py-1.5">
+        <span className="h-1.5 w-1.5 flex-none animate-pulse rounded-full bg-amber-400" />
+        <p className="font-display text-[10px] font-semibold uppercase leading-tight tracking-[0.12em] text-amber-400/90">
           {beat.prompt}
         </p>
       </div>
 
-      <div className="flex flex-col gap-[3px] p-5">
+      <div className="relative flex flex-col gap-1 p-2">
         {beat.options.map((option, i) => {
           const isSelected = selectedId === option.id
           const isDisabled = Boolean(selectedId) && !isSelected
@@ -37,34 +40,20 @@ export function ChoiceBeatView({
               type="button"
               disabled={Boolean(selectedId)}
               onClick={() => onSelect(option.id)}
-              style={{ clipPath: OPTION_CLIP }}
-              className={`group flex items-stretch border text-left transition-colors ${
+              className={`flex items-center gap-2 rounded border px-2.5 py-2 text-left text-xs font-medium transition-colors ${
                 isSelected
-                  ? 'border-amber-300 bg-amber-500/90 text-black shadow-[0_0_20px_rgba(245,158,11,0.5)]'
+                  ? 'border-amber-300 bg-amber-500/90 text-black'
                   : isDisabled
-                    ? 'border-white/10 bg-black/20 text-white/25'
-                    : 'border-amber-700/40 bg-black/40 text-stone-100 hover:border-amber-400 hover:bg-amber-500/10'
+                    ? 'border-white/10 text-white/25'
+                    : 'border-amber-600/25 text-stone-100 hover:border-amber-400 hover:bg-amber-500/10'
               }`}
             >
               <span
-                className={`flex w-10 flex-none items-center justify-center font-display text-base font-bold ${
-                  isSelected ? 'bg-black/15 text-black' : 'bg-amber-600/15 text-amber-400'
-                }`}
+                className={`font-display text-[10px] font-bold ${isSelected ? 'text-black' : 'text-amber-500'}`}
               >
                 {i + 1}
               </span>
-              <span className="flex-1 px-4 py-3 font-display text-sm font-semibold uppercase tracking-wide">
-                {option.label}
-              </span>
-              <span
-                className={`flex w-8 flex-none items-center justify-center font-display text-lg transition-all ${
-                  isSelected
-                    ? 'text-black'
-                    : 'text-amber-500 opacity-0 group-hover:translate-x-0 group-hover:opacity-100 -translate-x-1'
-                }`}
-              >
-                &#9656;
-              </span>
+              <span className="flex-1 leading-snug">{option.label}</span>
             </button>
           )
         })}

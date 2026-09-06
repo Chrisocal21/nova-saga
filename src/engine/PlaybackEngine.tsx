@@ -108,7 +108,7 @@ export function PlaybackEngine({ level, onChoicesChange }: PlaybackEngineProps) 
 
   return (
     <div className="relative flex h-screen w-full flex-col overflow-hidden bg-black">
-      <p className="absolute left-4 top-4 z-10 font-display text-xs uppercase tracking-widest text-amber-400/70">
+      <p className="absolute left-4 top-4 z-10 max-w-[55%] truncate font-display text-xs uppercase tracking-widest text-amber-400/70 sm:max-w-[70%]">
         {level.series} — Issue {level.issueNumber}
       </p>
 
@@ -148,7 +148,7 @@ export function PlaybackEngine({ level, onChoicesChange }: PlaybackEngineProps) 
         </div>
       )}
 
-      {beat.kind !== 'bubble' && (
+      {beat.kind === 'caption' && (
         <div
           key={`bar-${beat.id}`}
           className={`absolute inset-x-0 bottom-0 bg-gradient-to-t from-black via-black/85 to-transparent px-6 pb-8 pt-20 transition-opacity duration-500 ${
@@ -156,14 +156,7 @@ export function PlaybackEngine({ level, onChoicesChange }: PlaybackEngineProps) 
           }`}
         >
           <div className="mx-auto flex w-full max-w-xl flex-col items-center text-center">
-            {beat.kind === 'caption' && <CaptionBeatView beat={beat} />}
-            {beat.kind === 'choice' && (
-              <ChoiceBeatView
-                beat={beat}
-                selectedId={choices[beat.id]}
-                onSelect={(optionId) => handleSelect(beat.id, optionId)}
-              />
-            )}
+            <CaptionBeatView beat={beat} />
 
             {atEnd && showText && (
               <p className="mt-4 font-display text-xs uppercase tracking-widest text-white/30">
@@ -171,6 +164,21 @@ export function PlaybackEngine({ level, onChoicesChange }: PlaybackEngineProps) 
               </p>
             )}
           </div>
+        </div>
+      )}
+
+      {beat.kind === 'choice' && (
+        <div
+          key={`choice-${beat.id}`}
+          className={`absolute bottom-4 right-4 z-10 transition-opacity duration-500 sm:bottom-6 sm:right-6 ${
+            showText ? 'opacity-100' : 'pointer-events-none opacity-0'
+          }`}
+        >
+          <ChoiceBeatView
+            beat={beat}
+            selectedId={choices[beat.id]}
+            onSelect={(optionId) => handleSelect(beat.id, optionId)}
+          />
         </div>
       )}
 
