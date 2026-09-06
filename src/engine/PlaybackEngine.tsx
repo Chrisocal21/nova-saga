@@ -5,8 +5,9 @@ import { Panel } from './Panel'
 import { CaptionBeatView } from './beats/CaptionBeatView'
 import { ChoiceBeatView } from './beats/ChoiceBeatView'
 import { SpeechBubble } from './beats/SpeechBubble'
+import { TransitionMontage } from './beats/TransitionMontage'
 
-const TRANSITION_FRAME_MS = 700
+const TRANSITION_HOLD_MS = 1800
 const TEXT_REVEAL_DELAY_MS = 550
 
 interface PlaybackEngineProps {
@@ -14,33 +15,32 @@ interface PlaybackEngineProps {
   onChoicesChange?: (choices: Record<string, string>) => void
 }
 
-function panelLabelFor(beat: Level['beats'][number], transitionFrame: number) {
+function panelLabelFor(beat: Level['beats'][number]) {
   switch (beat.kind) {
     case 'caption':
     case 'bubble':
       return beat.panelLabel
-    case 'transition':
-      return beat.panelLabels[Math.min(transitionFrame, beat.panelLabels.length - 1)]
     case 'choice':
       return beat.panelLabel ?? 'Decision point'
+    case 'transition':
+      return ''
   }
 }
 
-function panelSrcFor(beat: Level['beats'][number], transitionFrame: number) {
+function panelSrcFor(beat: Level['beats'][number]) {
   switch (beat.kind) {
     case 'caption':
     case 'bubble':
     case 'choice':
       return beat.image
     case 'transition':
-      return beat.images?.[Math.min(transitionFrame, beat.images.length - 1)]
+      return undefined
   }
 }
 
 export function PlaybackEngine({ level, onChoicesChange }: PlaybackEngineProps) {
   const [index, setIndex] = useState(0)
   const [choices, setChoices] = useState<Record<string, string>>({})
-  const [transitionFrame, setTransitionFrame] = useState(0)
   const [revealedBeatId, setRevealedBeatId] = useState<string | null>(null)
 
   const beats = level.beats
@@ -54,7 +54,6 @@ export function PlaybackEngine({ level, onChoicesChange }: PlaybackEngineProps) 
 
   const advance = () => {
     setIndex((i) => Math.min(i + 1, beats.length - 1))
-    setTransitionFrame(0)
   }
 
   // Let the art hold on screen a beat before the text/choices appear, so the
@@ -66,24 +65,16 @@ export function PlaybackEngine({ level, onChoicesChange }: PlaybackEngineProps) 
     return () => clearTimeout(timer)
   }, [beat])
 
-  // Transition beats auto-play their frames, then auto-advance to the next beat.
+  // Transition beats show every frame together as one comic-strip montage,
+  // hold, then auto-advance (page-turn) to the next beat, where text resumes.
   useEffect(() => {
     if (beat.kind !== 'transition') return
+    if (index >= beats.length - 1) return
 
-    const totalFrames = beat.panelLabels.length
-    const holdMs = beat.holdMs ?? TRANSITION_FRAME_MS
-
-    if (transitionFrame < totalFrames - 1) {
-      const timer = setTimeout(() => setTransitionFrame((f) => f + 1), holdMs)
-      return () => clearTimeout(timer)
-    }
-
-    if (index < beats.length - 1) {
-      const timer = setTimeout(advance, holdMs)
-      return () => clearTimeout(timer)
-    }
+    const timer = setTimeout(advance, beat.holdMs ?? TRANSITION_HOLD_MS)
+    return () => clearTimeout(timer)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [beat, transitionFrame, index])
+  }, [beat, index])
 
   // Choice beats auto-advance shortly after the player picks an option.
   useEffect(() => {
@@ -114,19 +105,21 @@ export function PlaybackEngine({ level, onChoicesChange }: PlaybackEngineProps) 
         {level.series} — Issue {level.issueNumber}
       </p>
 
-      <Panel
-        key={`${beat.id}-${transitionFrame}`}
-        src={panelSrcFor(beat, transitionFrame)}
-        seed={`${beat.id}-${transitionFrame}`}
-        label={panelLabelFor(beat, transitionFrame)}
-        className="flex-1"
-      />
+      {beat.kind === 'transition' ? (
+        <TransitionMontage key={beat.id} beat={beat} />
+      ) : (
+        <Panel
+          key={beat.id}
+          src={panelSrcFor(beat)}
+          seed={beat.id}
+          label={panelLabelFor(beat)}
+          className="flex-1"
+        />
+      )}
 
-      {beat.kind === 'transition' &&
-        beat.impactText &&
-        transitionFrame === beat.panelLabels.length - 1 && (
-          <ImpactBurst key={beat.id} text={beat.impactText} />
-        )}
+      {beat.kind === 'transition' && beat.impactText && (
+        <ImpactBurst key={beat.id} text={beat.impactText} />
+      )}
 
       {beat.kind === 'bubble' && (
         <div
