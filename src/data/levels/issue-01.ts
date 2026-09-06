@@ -52,7 +52,6 @@ export const issue01: Level = {
       ],
       images: ['/art/issue-01/t1-0.png', '/art/issue-01/t1-1.png'],
       holdMs: 1600,
-      impactText: 'SNAP!',
     },
     {
       id: 'b5',
