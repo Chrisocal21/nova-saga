@@ -134,6 +134,50 @@ deepening toward night.
 
 ---
 
+## Ready-to-Paste Prompts
+
+Each one is self-contained — style, palette, and character description
+folded in — so you can paste a single frame's prompt straight into an
+image generator without needing the sections above for context.
+
+Nova is set to **brown hair** below (still unresolved in canon per the
+Character Notes above) — swap the word "brown" for "blonde" in any
+prompt if you want the other. Jax's look is a disposable placeholder.
+
+**Frame 1:**
+Wide establishing shot of a grounded, dystopian city skyline at dusk. Dense concrete high-rises, scattered lit windows, overcast sky with muted amber dusk light breaking through smog and haze. No characters in frame. Painted-and-inked digital illustration style, environment rendered with heavier photoreal concept-art detail and minimal linework. Desaturated cool gray-blue palette with amber accent lighting. Cinematic widescreen comic-panel framing, landscape orientation. No text, no logos, no watermarks.
+
+**Frame 2:**
+Street-level shot of a young woman (Nova — athletic build, brown hair, hood up, guarded expression) moving through a crowd of city-dwellers, head down, trying not to be noticed. Dense urban dystopian street, muted gray-blue palette, amber dusk lighting, background crowd softly blurred. Nova rendered semi-realistic with visible ink linework and moody muted colors; environment rendered heavier/more photoreal with minimal linework. Cinematic widescreen comic-panel framing. No text, no logos, no watermarks.
+
+**Frame 3:**
+Close-up shot of a young man (Jax — wiry build, dark messy/undercut hair, worn jacket) leaning against a concrete wall, smirking, arms crossed, casual confident posture. Same dystopian street, muted gray-blue palette, amber dusk lighting as prior frames. Painted-and-inked semi-realistic character rendering with visible linework, heavier photoreal environment detail behind him. Cinematic widescreen comic-panel framing. No text, no logos, no watermarks.
+
+**Frame 4:**
+Nova (young woman, athletic build, brown hair, hood up) half-turned toward camera, unreadable guarded expression. Same dystopian street setting as Frame 2, slightly tighter framing, same muted gray-blue and amber dusk lighting. Painted-and-inked semi-realistic character style with visible linework. Cinematic widescreen comic-panel framing. No text, no logos, no watermarks.
+
+**Frame 5a:**
+Nova (young woman, athletic build, brown hair, hood up) stopped mid-stride on an empty dystopian street, shoulders tense, seen partially from behind. Muted gray-blue palette, amber dusk lighting, painted-and-inked semi-realistic character style, heavier photoreal environment rendering. Cinematic widescreen comic-panel framing. No text, no logos, no watermarks.
+
+**Frame 5b:**
+Nova (same woman as 5a — athletic build, brown hair, hood up) now fully turned to face camera, jaw set, confrontational stance. Same street, same lighting and palette as 5a for continuity. Painted-and-inked semi-realistic character style with visible linework. Cinematic widescreen comic-panel framing. No text, no logos, no watermarks.
+
+**Frame 6:**
+Two-shot of Nova (young woman, athletic build, brown hair, hood up) and Jax (young man, wiry build, dark undercut hair, worn jacket) facing each other in an otherwise empty dystopian street, dusk light behind them, tense but controlled body language. Muted gray-blue palette, amber dusk lighting, painted-and-inked semi-realistic character rendering, heavier photoreal environment detail. Cinematic widescreen comic-panel framing. No text, no logos, no watermarks.
+
+**Frame 7 (optional — otherwise reuse Frame 6):**
+Same two-shot as Frame 6 — Nova (athletic build, brown hair, hood up) and Jax (wiry build, dark undercut hair, worn jacket) facing off in the empty street — but cropped slightly tighter with heightened tension in their posture. Same muted gray-blue palette and amber dusk lighting. Painted-and-inked semi-realistic character style. Cinematic widescreen comic-panel framing. No text, no logos, no watermarks.
+
+**Frame 8:**
+Wide shot of an empty dystopian street at dusk deepening toward night, Nova and Jax walking away together, seen from behind or at a distance, small in frame. Muted gray-blue palette with fading amber light. Heavier photoreal concept-art environment rendering, minimal linework. Cinematic widescreen comic-panel framing. No text, no logos, no watermarks.
+
+**If calling the OpenAI image API directly** rather than pasting into a
+chat UI: use the `images` endpoint with model `gpt-image-1`, and request
+a landscape size (`1536x1024` is the closest supported size to the
+8:5–3:2 ratio above).
+
+---
+
 ## Build Rules
 
 - No HTML in any output
