@@ -25,6 +25,17 @@ function panelLabelFor(beat: Level['beats'][number], transitionFrame: number) {
   }
 }
 
+function panelSrcFor(beat: Level['beats'][number], transitionFrame: number) {
+  switch (beat.kind) {
+    case 'caption':
+    case 'bubble':
+    case 'choice':
+      return beat.image
+    case 'transition':
+      return beat.images?.[Math.min(transitionFrame, beat.images.length - 1)]
+  }
+}
+
 export function PlaybackEngine({ level, onChoicesChange }: PlaybackEngineProps) {
   const [index, setIndex] = useState(0)
   const [choices, setChoices] = useState<Record<string, string>>({})
@@ -100,6 +111,7 @@ export function PlaybackEngine({ level, onChoicesChange }: PlaybackEngineProps) 
 
       <Panel
         key={`${beat.id}-${transitionFrame}`}
+        src={panelSrcFor(beat, transitionFrame)}
         seed={`${beat.id}-${transitionFrame}`}
         label={panelLabelFor(beat, transitionFrame)}
         className="flex-1"

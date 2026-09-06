@@ -11,6 +11,7 @@ export interface CaptionBeat {
   id: string
   kind: 'caption'
   panelLabel: string
+  image?: string
   text: string
 }
 
@@ -18,6 +19,7 @@ export interface BubbleBeat {
   id: string
   kind: 'bubble'
   panelLabel: string
+  image?: string
   speaker: string
   bubbleType: 'speech' | 'thought'
   text: string
@@ -27,6 +29,7 @@ export interface TransitionBeat {
   id: string
   kind: 'transition'
   panelLabels: string[]
+  images?: string[]
   holdMs?: number
 }
 
@@ -34,6 +37,7 @@ export interface ChoiceBeat {
   id: string
   kind: 'choice'
   panelLabel?: string
+  image?: string
   prompt: string
   options: ChoiceOption[]
 }
