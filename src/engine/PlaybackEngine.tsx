@@ -41,11 +41,16 @@ export function PlaybackEngine({ level, onChoicesChange }: PlaybackEngineProps) 
   const [index, setIndex] = useState(0)
   const [choices, setChoices] = useState<Record<string, string>>({})
   const [transitionFrame, setTransitionFrame] = useState(0)
-  const [showText, setShowText] = useState(false)
+  const [revealedBeatId, setRevealedBeatId] = useState<string | null>(null)
 
   const beats = level.beats
   const beat = beats[index]
   const atEnd = index === beats.length - 1
+  // Derived, not stored: comparing to the beat's own id (rather than a plain
+  // boolean reset in an effect) means a new beat's text is correctly hidden
+  // on its very first render instead of flashing at full opacity for a
+  // frame before the reset effect catches up.
+  const showText = revealedBeatId === beat.id
 
   const advance = () => {
     setIndex((i) => Math.min(i + 1, beats.length - 1))
@@ -55,10 +60,9 @@ export function PlaybackEngine({ level, onChoicesChange }: PlaybackEngineProps) 
   // Let the art hold on screen a beat before the text/choices appear, so the
   // panel isn't upstaged by the caption the instant it arrives.
   useEffect(() => {
-    setShowText(false)
     if (beat.kind === 'transition') return
 
-    const timer = setTimeout(() => setShowText(true), TEXT_REVEAL_DELAY_MS)
+    const timer = setTimeout(() => setRevealedBeatId(beat.id), TEXT_REVEAL_DELAY_MS)
     return () => clearTimeout(timer)
   }, [beat])
 
