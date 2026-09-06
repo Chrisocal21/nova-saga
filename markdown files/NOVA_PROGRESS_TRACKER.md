@@ -14,7 +14,7 @@
 #### Feature 1.1 — Core Playback Engine
 **Progress:** 100%
 
-- [x] Build continuous-scroll visual novel page renderer
+- [x] Build single full-screen panel renderer (each beat fully replaces the last)
 - [x] Implement inline choice panels (up to 3 options, no popup, no timer)
 - [x] Build transition beat system (short pose/frame sequences at meaningful scene changes)
 - [x] Build dual text system (VN captions for narrative, comic bubbles for side/humor beats)
@@ -153,7 +153,8 @@ Implemented in `src/engine/` on top of a typed beat model (`src/types/story.ts`)
 | Date | What Moved | New Overall |
 |---|---|---|
 | September 6, 2026 | Full planning session: core loop, art direction, format, and platform all locked. Docs generated. No build started yet. | 0% |
-| September 6, 2026 | Project scaffolded (React + Vite + TS + Tailwind, git init). Feature 1.1 (Core Playback Engine) built and typechecked: continuous-scroll renderer, inline choice panels, transition beat system, dual text system, placeholder Issue 1 script. | 4% |
+| September 6, 2026 | Project scaffolded (React + Vite + TS + Tailwind, git init). Feature 1.1 (Core Playback Engine) built and typechecked: renderer, inline choice panels, transition beat system, dual text system, placeholder Issue 1 script. | 4% |
+| September 6, 2026 | Reading format revised after seeing the first build: single full-screen panel replacing the last, not a continuous scroll. Engine rebuilt to match; docs updated. | 4% |
 
 ---
 

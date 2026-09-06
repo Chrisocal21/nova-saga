@@ -29,7 +29,7 @@ Full planning reference: NOVA_FEATURE_MAP.md, NOVA_PROGRESS_TRACKER.md, NOVA_OPE
 ## Core Systems to Build First (Phase 1)
 
 ### 1. Core Playback Engine
-- Continuous-scroll visual novel page renderer
+- Single full-screen panel renderer — each beat fully replaces the last (no scrollback/stacking)
 - Inline choice panels — up to 3 options, no popup/modal, no timer
 - Transition beat system — short (2–3 frame) pose/background-static sequences, triggered only at meaningful scene changes, not every beat
 - Dual text system — visual-novel-style captions for main narrative, comic speech/thought bubbles for side-character or off-story humor beats

@@ -33,6 +33,7 @@ export interface TransitionBeat {
 export interface ChoiceBeat {
   id: string
   kind: 'choice'
+  panelLabel?: string
   prompt: string
   options: ChoiceOption[]
 }

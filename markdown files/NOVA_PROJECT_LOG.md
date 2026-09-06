@@ -46,6 +46,7 @@
 - Dropped the earlier hero/villain track framing from initial brainstorming — replaced with relationship-based branching
 - Time travel unlock was initially discussed as a possible mid-story (2060 era) addition, then corrected to be available from the very start of the story (Birth of a Hero, Series I)
 - NOVA_CLIFFNOTES.md and NOVA_TIMELINE.md updated to replace paraphrased placeholder series/issue titles with Chris's real canon titles
+- Reading format revised: the initial "continuous scroll" plan was built and reviewed live, and stacking panels down the page didn't read well. Changed to a single full-screen panel that fully replaces the last on each beat — no scrollback, no stacking. Core Playback Engine rebuilt to match; NOVA_CLAUDE_GUIDE.md, NOVA_FEATURE_MAP.md, and NOVA_OPEN_QUESTIONS.md updated
 
 ---
 

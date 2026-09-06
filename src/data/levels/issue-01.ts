@@ -54,6 +54,7 @@ export const issue01: Level = {
     {
       id: 'c1',
       kind: 'choice',
+      panelLabel: 'Two-shot — Nova and Jax facing each other in the empty street',
       prompt: 'How does Nova respond to Jax?',
       options: [
         { id: 'trust', label: 'Hear him out — he has earned that much' },

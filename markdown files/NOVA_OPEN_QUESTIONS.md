@@ -25,7 +25,7 @@
 | Who's producing the art? | AI-assisted for now; commissioned artist later if the project proves itself | Sep 6, 2026 |
 | What platform does this live on? | Browser/PWA, linked from the ProbablyFineStudios site | Sep 6, 2026 |
 | How is auth/save handled? | Clerk sign-in, cross-device sync, autosave at every checkpoint | Sep 6, 2026 |
-| What's the reading format? | Continuous scroll, visual-novel style, comic-panel presentation | Sep 6, 2026 |
+| What's the reading format? | Single full-screen panel at a time, visual-novel style — each beat fully replaces the last (no scrollback/stacking). Revised from an initial "continuous scroll" plan after seeing it in the built engine: stacking panels down the page didn't read well. | Sep 6, 2026 |
 | How do choices appear? | Inline as panels in the scroll, no popups, no timer | Sep 6, 2026 |
 | Is there animation? | Not full animation — short transition beats (2–3 pose/frame variations, same background) at meaningful scene changes only | Sep 6, 2026 |
 | Is there sound/voice? | Silent for now, text and art only; narration/voice acting open as a future addition | Sep 6, 2026 |

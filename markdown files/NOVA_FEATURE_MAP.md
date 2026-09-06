@@ -15,7 +15,7 @@ Each comic issue becomes a playable level. The player reads through it visual-no
 **Goal:** One real level, fully playable, proving the format works before building out a whole trilogy.
 
 ### Core Playback Engine
-- Continuous scroll "visual novel page" format
+- Single full-screen panel format — each beat fully replaces the last, no scrollback/stacking (revised from an initial continuous-scroll plan after prototyping — see NOVA_PROJECT_LOG.md)
 - Comic-style art panels with painted/inked character rendering, realistic environment rendering
 - Inline choice panels (up to 3 options), no popups, no timer
 - Transition beats: short multi-frame sequences (character pose/head changes, same background) at meaningful scene changes only

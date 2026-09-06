@@ -8,11 +8,9 @@ interface PanelProps {
 export function Panel({ label, className = '' }: PanelProps) {
   return (
     <div
-      className={`overflow-hidden rounded-md border border-white/10 bg-gradient-to-br from-slate-800 via-slate-900 to-black ${className}`}
+      className={`flex items-center justify-center bg-gradient-to-br from-slate-800 via-slate-900 to-black p-6 text-center text-sm italic text-white/40 ${className}`}
     >
-      <div className="flex h-48 items-center justify-center p-4 text-center text-xs italic text-white/40 sm:h-64">
-        [{label}]
-      </div>
+      [{label}]
     </div>
   )
 }

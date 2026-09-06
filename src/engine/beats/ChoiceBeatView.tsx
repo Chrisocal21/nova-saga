@@ -10,8 +10,8 @@ export function ChoiceBeatView({
   onSelect: (optionId: string) => void
 }) {
   return (
-    <div className="mb-8">
-      <p className="mb-3 text-sm font-medium text-slate-200">{beat.prompt}</p>
+    <div>
+      <p className="mb-4 text-lg font-medium text-slate-100">{beat.prompt}</p>
       <div className="flex flex-col gap-2">
         {beat.options.map((option) => {
           const isSelected = selectedId === option.id
