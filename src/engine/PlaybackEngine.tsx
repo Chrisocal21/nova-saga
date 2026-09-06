@@ -100,6 +100,7 @@ export function PlaybackEngine({ level, onChoicesChange }: PlaybackEngineProps) 
 
       <Panel
         key={`${beat.id}-${transitionFrame}`}
+        seed={`${beat.id}-${transitionFrame}`}
         label={panelLabelFor(beat, transitionFrame)}
         className="flex-1"
       />
