@@ -93,17 +93,7 @@ export function PlaybackEngine({ level, onChoicesChange }: PlaybackEngineProps) 
     !atEnd && showText && (beat.kind === 'caption' || beat.kind === 'bubble')
 
   return (
-    <div
-      role={canAdvanceOnClick ? 'button' : undefined}
-      tabIndex={canAdvanceOnClick ? 0 : undefined}
-      onClick={canAdvanceOnClick ? advance : undefined}
-      onKeyDown={(e) => {
-        if (canAdvanceOnClick && (e.key === 'Enter' || e.key === ' ')) advance()
-      }}
-      className={`relative flex h-screen w-full flex-col overflow-hidden bg-black ${
-        canAdvanceOnClick ? 'cursor-pointer select-none' : ''
-      }`}
-    >
+    <div className="relative flex h-screen w-full flex-col overflow-hidden bg-black">
       <p className="absolute left-4 top-4 z-10 text-xs uppercase tracking-widest text-purple-300/70">
         {level.series} — Issue {level.issueNumber}
       </p>
@@ -119,27 +109,37 @@ export function PlaybackEngine({ level, onChoicesChange }: PlaybackEngineProps) 
           showText ? 'opacity-100' : 'pointer-events-none opacity-0'
         }`}
       >
-        {beat.kind === 'caption' && <CaptionBeatView beat={beat} />}
-        {beat.kind === 'bubble' && <BubbleBeatView beat={beat} />}
-        {beat.kind === 'choice' && (
-          <ChoiceBeatView
-            beat={beat}
-            selectedId={choices[beat.id]}
-            onSelect={(optionId) => handleSelect(beat.id, optionId)}
-          />
-        )}
+        <div className="mx-auto flex w-full max-w-xl flex-col items-center text-center">
+          {beat.kind === 'caption' && <CaptionBeatView beat={beat} />}
+          {beat.kind === 'bubble' && <BubbleBeatView beat={beat} />}
+          {beat.kind === 'choice' && (
+            <ChoiceBeatView
+              beat={beat}
+              selectedId={choices[beat.id]}
+              onSelect={(optionId) => handleSelect(beat.id, optionId)}
+            />
+          )}
 
-        {canAdvanceOnClick && (
-          <p className="mt-4 animate-pulse text-center text-xs uppercase tracking-widest text-white/30">
-            Tap to continue
-          </p>
-        )}
-        {atEnd && showText && (
-          <p className="mt-4 text-center text-xs uppercase tracking-widest text-white/30">
-            End of issue
-          </p>
-        )}
+          {atEnd && showText && (
+            <p className="mt-4 text-xs uppercase tracking-widest text-white/30">
+              End of issue
+            </p>
+          )}
+        </div>
       </div>
+
+      {canAdvanceOnClick && (
+        <button
+          type="button"
+          onClick={advance}
+          aria-label="Continue"
+          className="absolute inset-y-0 right-0 z-20 flex w-1/2 cursor-pointer items-end justify-end p-6"
+        >
+          <span className="animate-pulse text-xs uppercase tracking-widest text-white/40">
+            Tap to continue
+          </span>
+        </button>
+      )}
     </div>
   )
 }
